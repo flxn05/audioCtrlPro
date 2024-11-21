@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AudioCtrl Pro</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AudioCtrl <span>Pro</span></h1>
+      <div id="status-playing" class="status online">Playing</div>
+      <div id="status-ready" class="status paused">Ready</div>
+      <div id="status-offline" class="status offline">Offline</div>
+    </header>
+
+    <!-- Equalizer Visualizer -->
+    <div class="visualizer">
+      <div class="bar" id="visual-bar-1"></div>
+      <div class="bar" id="visual-bar-2"></div>
+      <div class="bar" id="visual-bar-3"></div>
+      <div class="bar" id="visual-bar-4"></div>
+      <div class="bar" id="visual-bar-5"></div>
+      <div class="bar" id="visual-bar-6"></div>
+    </div>
+
+    <!-- Equalizer Controls -->
+    <div class="equalizer-controls">
+      <div class="slider-group">
+        <label for="slider1">Freq 1</label>
+        <input type="range" id="slider1" min="-10" max="10" value="0" orient="vertical" oninput="updateSlider(1, this.value)">
+      </div>
+      <div class="slider-group">
+        <label for="slider2">Freq 2</label>
+        <input type="range" id="slider2" min="-10" max="10" value="0" orient="vertical" oninput="updateSlider(2, this.value)">
+      </div>
+      <div class="slider-group">
+        <label for="slider3">Freq 3</label>
+        <input type="range" id="slider3" min="-10" max="10" value="0" orient="vertical" oninput="updateSlider(3, this.value)">
+      </div>
+      <div class="slider-group">
+        <label for="slider4">Freq 4</label>
+        <input type="range" id="slider4" min="-10" max="10" value="0" orient="vertical" oninput="updateSlider(4, this.value)">
+      </div>
+      <div class="slider-group">
+        <label for="slider5">Freq 5</label>
+        <input type="range" id="slider5" min="-10" max="10" value="0" orient="vertical" oninput="updateSlider(5, this.value)">
+      </div>
+      <div class="slider-group">
+        <label for="slider6">Freq 6</label>
+        <input type="range" id="slider6" min="-10" max="10" value="0" orient="vertical" oninput="updateSlider(6, this.value)">
+      </div>
+    </div>
+
+    <!-- FX Controls -->
+    <div class="fx-controls">
+      <div class="slider-group">
+        <label for="fx-reverb">Reverb</label>
+        <input type="range" id="fx-reverb" min="0" max="100" value="0" oninput="updateFxSlider('reverb', this.value)">
+        <span id="fx-reverb-indicator">0%</span>
+      </div>
+      <div class="slider-group">
+        <label for="fx-delay">Delay</label>
+        <input type="range" id="fx-delay" min="0" max="5" value="0" step="0.1" oninput="updateFxSlider('delay', this.value)">
+        <span id="fx-delay-indicator">0s</span>
+      </div>
+      <div class="slider-group">
+        <label for="fx-distortion">Distortion</label>
+        <input type="range" id="fx-distortion" min="0" max="100" value="0" oninput="updateFxSlider('distortion', this.value)">
+        <span id="fx-distortion-indicator">0%</span>
+      </div>
+      <div class="slider-group">
+        <label for="fx-chorus">Chorus</label>
+        <input type="range" id="fx-chorus" min="0" max="10" value="0" step="0.1" oninput="updateFxSlider('chorus', this.value)">
+        <span id="fx-chorus-indicator">0.0</span>
+      </div>
+    </div>
+
+    <!-- Preset Buttons -->
+    <div class="presets">
+      <label for="bpm">BPM</label>
+      <input type="number" id="bpm">
+      <button class="preset">Pre 1</button>
+      <button class="preset">Pre 2</button>
+      <button class="preset">Pre 3</button>
+      <button class="preset" id="rstE">RST_E</button>
+      <button class="preset" id="rstFx">RST_FX</button>
+      <button class="preset" id="rstA">RST_A</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,242 @@
+:root {
+  --primary-color: #4caf50;
+  --primary-inactive-color: #4caf4f7b;
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --aD: 1s; /*animation duration (rgb)*/
+  --bD: 2s; /*bounce duration*/
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #222;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+  width: 400px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+span {
+  background-color: #121212;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.status.online {
+  background-color: var(--primary-color);
+  animation: active 1.2s ease both infinite;
+}
+
+.status.paused {
+  background-color: orange;
+  animation: pause 4.8s ease both infinite;
+}
+
+@keyframes active {
+  0%, 100% {
+    background-color: var(--primary-color);
+  }
+  50% {
+    background-color: var(--primary-inactive-color);
+  }
+}
+
+@keyframes pause {
+  0%, 100% {
+    background-color: orange;
+  }
+  50% {
+    background-color: rgba(255, 166, 0, 0.463);
+  }
+}
+
+.status.offline {
+  background-color: red;
+}
+
+.visualizer {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.bar {
+  width: 10px;
+  height: 100px;
+  background: linear-gradient(to top, var(--primary-color), transparent);
+  transform: scaleY(var(--level));
+  animation: bounce var(--bD) infinite ease-in-out, hueShift var(--aD) infinite linear;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1.2);
+    background: linear-gradient(to top, var(--primary-inactive-color), transparent);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes hueShift {
+  0% {
+    filter: hue-rotate(0deg); /* Start with original color */
+  }
+  100% {
+    filter: hue-rotate(360deg); /* Complete one full rotation of hues */
+  }
+}
+
+.equalizer-controls {
+  margin: 20px 0;
+}
+
+.fx-controls {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slider-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.slider-group label {
+  font-size: 0.9em;
+  margin-right: 10px;
+  flex: 1;
+}
+
+.slider-group span {
+  font-size: 0.9em;
+  color: var(--text-color);
+  background-color: #444;
+  padding: 2px 5px;
+  border-radius: 5px;
+  min-width: 30px;
+  text-align: center;
+}
+
+input[type="range"] {
+  flex: 3;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--primary-inactive-color);
+  height: 4px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  animation: hueShift var(--aD) infinite linear; /* Apply hue-shifting animation to the track */
+  transition: background 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px var(--primary-color);
+  animation: hueShift var(--aD) infinite linear; /* Apply hue-shifting animation to the thumb */
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.4);
+}
+
+.presets button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.presets button:hover {
+  background-color: #555;
+}
+
+#send-config {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#send-config:hover {
+  background-color: #388e3c;
+}
+
+@media (min-width: 768px) {
+  .visualizer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    top: 10vh;
+    bottom: 10vh;
+    left: 0;
+    right: 0;    
+    margin: 0;
+    z-index: -1;
+  }
+
+  .bar {
+    width: 6%; /* Thinner bars for larger screens */
+    height: 100%; /* Stretch bars to fill the height */
+  }
+  .container {
+    width: 555px;
+  }
+}
